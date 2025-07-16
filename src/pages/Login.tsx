@@ -27,7 +27,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post("https://final-project-api-q0ob.onrender.com/auth/login", {
+            const response = await axios.post("https://medical-backend-v1wz.onrender.com/auth/login", {
                 email,
                 password,
             });
