@@ -1,19 +1,36 @@
-import { useState } from 'react';
-import { Menu, X, Phone, Calendar } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Menu, X, Phone } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { logout } from "../features/authSlice";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const token = localStorage.getItem("Token");
+    const user = JSON.parse(localStorage.getItem("User") || "{}");
+    const isAdmin = user.isAdmin;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-  ];
+      useEffect(() => {
+        setIsLoggedIn(!!token);
+    }, [token, user]);
 
-  const isActive = (path: string) => location.pathname === path;
+    const handleLogout = () => {
+        localStorage.removeItem("Token");
+        localStorage.removeItem("User");
+        dispatch(logout());
+        setIsLoggedIn(false);
+        setIsMenuOpen(false);
+        navigate("/login");
+    };
+
+    const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `${
+        isActive ? "text-purple-600 underline" : "text-gray-700 hover:text-purple-600"
+    } text-base lg:text-lg font-semibold transition-colors`;
 
   return (
       <header className="w-full bg-white shadow-sm sticky top-0 z-50">
@@ -29,29 +46,57 @@ const Header = () => {
 
                   {/* Desktop Navigation */}
                   <nav className="hidden md:flex space-x-8">
-                      {navigation.map((item) => (
-                          <NavLink
-                              key={item.name}
-                              to={item.href}
-                              className={`text-sm font-medium transition-colors duration-200 ${
-                                  isActive(item.href)
-                                      ? "text-purple-600 border-b-2 border-purple-600 pb-1"
-                                      : "text-gray-700 hover:text-purple-600"
-                              }`}
-                          >
-                              {item.name}
-                          </NavLink>
-                      ))}
+                    <NavLink to="/" className={getLinkClass}>
+                        Home
+                    </NavLink>
+                    <NavLink to="/about" className={getLinkClass}>
+                        About
+                    </NavLink>
+                    {isLoggedIn && (
+                        <NavLink to="/dashboard" className={getLinkClass}>
+                            Dashboard
+                        </NavLink>
+                    )}
+                    {isAdmin && (
+                        <NavLink to="/admin" className={getLinkClass}>
+                            Admin
+                        </NavLink>
+                    )}
                   </nav>
 
                   {/* Desktop CTA Buttons */}
                   <div className="hidden md:flex items-center space-x-4">
-                      <NavLink to={"/login"} className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors duration-200">
-                          LogIn
-                      </NavLink>
-                      <NavLink to={"/register"} className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors duration-200">
-                          Sign up
-                      </NavLink>
+                        {isLoggedIn ? (
+                              <>
+                                <NavLink
+                                    to="/profile"
+                                    className="px-4 py-2 border rounded-md text-gray-700 hover:border-purple-600 transition-colors"
+                                >
+                                    Profile
+                                </NavLink>
+                                <button
+                                    onClick={handleLogout}
+                                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink
+                                    to="/login"
+                                    className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                                >
+                                    Login
+                                </NavLink>
+                                <NavLink
+                                    to="/register"
+                                    className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                                >
+                                    Register
+                                </NavLink>
+                            </>
+                        )}
                   </div>
 
                   {/* Mobile menu button */}
@@ -69,28 +114,69 @@ const Header = () => {
               {isMenuOpen && (
                   <div className="md:hidden">
                       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-                          {navigation.map((item) => (
-                              <NavLink
-                                  key={item.name}
-                                  to={item.href}
-                                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                                      isActive(item.href)
-                                          ? "text-purple-600 bg-purple-50"
-                                          : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
-                                  }`}
-                                  onClick={() => setIsMenuOpen(false)}
-                              >
-                                  {item.name}
-                              </NavLink>
-                          ))}
+                        <NavLink to="/" className={`${getLinkClass} block text-black`} onClick={() => setIsMenuOpen(false)}>
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to="/about"
+                            className={`${getLinkClass} block text-black`}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            About
+                        </NavLink>
+                        {isLoggedIn && (
+                            <NavLink
+                                to="/dashboard"
+                                className={`${getLinkClass} block text-black`}
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Dashboard
+                            </NavLink>
+                        )}
+                        {isAdmin && (
+                            <NavLink
+                                to="/admin"
+                                className={`${getLinkClass} block text-black`}
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Admin
+                            </NavLink>
+                        )}
                           <div className="px-3 py-2 space-y-2">
-                              <button className="w-full flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-700 py-2 transition-colors duration-200">
-                                  <Calendar className="h-4 w-4" />
-                                  <span className="text-sm font-medium">Appointment</span>
-                              </button>
-                              <button className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors duration-200">
-                                  Sign up
-                              </button>
+                    {isLoggedIn ? (
+                        <>
+                            <NavLink
+                                to="/profile"
+                                className="block border px-4 py-2 rounded text-gray-700 hover:border-purple-500 transition-colors w-full"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Profile
+                            </NavLink>
+                            <button
+                                className="block w-full text-left bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
+                                onClick={() => { handleLogout(); setIsMenuOpen(false); }}
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink
+                                to="/login"
+                                className="block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className="block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Register
+                            </NavLink>
+                        </>
+                    )}
                           </div>
                       </div>
                   </div>

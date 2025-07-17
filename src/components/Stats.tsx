@@ -37,7 +37,7 @@ const Stats = () => {
                         return (
                             <div key={index} className="text-center">
                                 <div className="inline-flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-4">
-                                    <IconComponent className="h-8 w-8 text-white" />
+                                    <IconComponent className="h-8 w-8 text-black" />
                                 </div>
                                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stat.number}</div>
                                 <div className="text-purple-100 font-medium">{stat.label}</div>
