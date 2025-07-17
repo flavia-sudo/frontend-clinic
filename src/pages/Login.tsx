@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import { login } from "../features/authSlice";
+import type { AppDispatch } from "../../store";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -11,6 +13,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const togglePassword = () => setShowPassword((prev) => !prev);
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -35,6 +38,8 @@ const Login = () => {
             if (response.status === 200) {
                 const user = response.data.user;
                 const token = response.data.token;
+
+                dispatch(login({ ...user, token }));
 
                 setEmail("");
                 setPassword("");

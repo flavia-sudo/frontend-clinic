@@ -1,4 +1,3 @@
-import React from "react";
 import { Heart, Stethoscope, Brain, Eye, Users, Clock } from "lucide-react";
 
 const Services = () => {

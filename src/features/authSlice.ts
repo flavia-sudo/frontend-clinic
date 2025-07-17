@@ -11,7 +11,7 @@ interface User {
   password: string;
   phoneNumber: string | null;
   address: string;
-  role: "admin" | "user";
+  role: "admin" | "user" | "doctor";
   createdAt: string;
   updatedAt: string;
   image_URL: string;
