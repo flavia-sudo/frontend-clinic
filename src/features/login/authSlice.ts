@@ -22,12 +22,14 @@ interface User {
 
 // Defining the shape of the authentication state
 interface AuthState {
+    token: string | null;
     user: User | null; // Will be null if not logged in
 }
 
 // Initialize the auth state by checking if a user is stored in localStorage
 const initialState: AuthState = {
     user: JSON.parse(localStorage.getItem("User") || "null"), // Parse user from localStorage or null
+    token: null
 };
 
 // Create a Redux slice for authentication logic

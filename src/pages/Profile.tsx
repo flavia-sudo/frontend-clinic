@@ -72,7 +72,7 @@ const Profile = () => {
 
         try {
             const response = await fetch(
-                `https://final-project-api-q0ob.onrender.com/users/update/${user.userId}`,
+                `https://medical-backend-v1wz.onrender.com/users/update/${user.userId}`,
                 {
                     method: "PUT",
                     headers: {
