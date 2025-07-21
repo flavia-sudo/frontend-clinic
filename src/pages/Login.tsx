@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
-import { login } from "../features/authSlice";
-import type { AppDispatch } from "../../store";
+import { login } from "../features/login/authSlice";
+import type { AppDispatch } from "../app/store";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -36,6 +36,7 @@ const Login = () => {
             });
 
             if (response.status === 200) {
+                console.log(response.data);
                 const user = response.data.user;
                 const token = response.data.token;
 

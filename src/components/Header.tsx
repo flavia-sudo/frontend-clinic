@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { logout } from "../features/authSlice";
+import { logout } from "../features/login/authSlice";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

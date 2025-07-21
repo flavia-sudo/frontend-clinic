@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../features/login/authSlice";
 
 const Register = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -12,7 +15,6 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
-    const [role, setRole] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -55,7 +57,7 @@ const Register = () => {
             phoneNumber,
             address,
             password,
-            role,
+            role: "user",
         };
 
         try {
@@ -78,6 +80,8 @@ const Register = () => {
             const user = response.data.user;
             const token = response.data.token;
 
+            dispatch(login({ ...user, token }));
+
             // Reset form
             setFirstName("");
             setLastName("");
@@ -86,7 +90,6 @@ const Register = () => {
             setConfirmPassword("");
             setPhoneNumber("");
             setAddress("");
-            setRole("");
 
             setShowVerificationForm(true);
         } catch (error: unknown) {
@@ -211,22 +214,6 @@ const Register = () => {
                                         id="address"
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
-                                        required
-                                        className="w-full px-3 py-2 mt-1 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500"
-                                    />
-                                </div>
-                                <div className="w-full">
-                                    <label htmlFor="lastName" className="block font-medium text-gray-700 text-bg">
-                                        Role
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="lastName"
-                                        value={role}
-                                        onChange={(e) => {
-                                            const value = e.target.value;
-                                            setLastName(value.charAt(0).toUpperCase() + value.slice(1));
-                                        }}
                                         required
                                         className="w-full px-3 py-2 mt-1 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500"
                                     />

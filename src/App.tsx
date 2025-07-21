@@ -1,10 +1,12 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
     return (
@@ -16,7 +18,10 @@ function App() {
                       <Route path="/about" element={<About />} />
                       <Route path="/login" element={<Login />} />
                       <Route path="/register" element={<Register />} />
-                  </Routes>
+                      <Route path="/profile" element={<Profile />} />
+                      <Route path="/dashboard" element={<AdminDashboard />} />
+                      <Route path="*" element={<NotFound />} />                 
+                    </Routes>
               </main>
           </div>
     );

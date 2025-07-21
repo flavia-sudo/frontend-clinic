@@ -1,0 +1,1 @@
+export const ApiDomain = "https://medical-backend-v1wz.onrender.com";

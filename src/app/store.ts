@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 // Import individual reducers for different parts of the state
-import authReducer from "./src/features/authSlice"; // Handles authentication state
+import authReducer from "../features/login/authSlice"; // Handles authentication state
+
 
 // Create and export the Redux store
 export const store = configureStore({
