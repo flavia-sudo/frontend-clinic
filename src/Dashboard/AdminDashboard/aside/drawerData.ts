@@ -2,7 +2,6 @@ import { TbBrandBooking } from "react-icons/tb";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { FaUserCheck } from "react-icons/fa6";
-import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import type React from "react";
 
 export type DrawerData = {
@@ -20,10 +19,10 @@ export const adminDrawerData: DrawerData[] = [
         link: "doctors"
     },
     {
-        id: "bookings",
-        name: "Bookings",
+        id: "appointments",
+        name: "Appointments",
         icon: TbBrandBooking,
-        link: "bookings"
+        link: "appointments"
     },
     {
         id: "users",
@@ -36,11 +35,5 @@ export const adminDrawerData: DrawerData[] = [
         name: "Profile",
         icon: FaUserCheck,
         link: "profile"
-    },
-    {
-        id: "analytics",
-        name: "Analytics",
-        icon: TbBrandGoogleAnalytics,
-        link: "analytics"
     },
 ]

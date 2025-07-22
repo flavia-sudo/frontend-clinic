@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router';
 import * as yup from 'yup';
 import { usersAPI } from '../features/users/userAPI';
+import { toast } from 'sonner';
 
 type VerifyInputs = {
     email: string;
@@ -38,6 +39,7 @@ const VerifyUser = () => {
         try {
             const response = await verifyUser(data).unwrap()
             console.log("Verification", response);
+            toast.success("Verification successful!");
             navigate('/login', {
                 state: {
                     email: data.email
@@ -46,6 +48,7 @@ const VerifyUser = () => {
             )
         }catch (error) {
             console.log("errorr", error);
+            toast.error("Verification failed. Please try again later.");
         }
     }
 
