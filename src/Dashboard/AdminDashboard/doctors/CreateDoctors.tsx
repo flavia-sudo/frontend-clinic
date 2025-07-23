@@ -39,7 +39,7 @@ const CreateDoctors = () => {
     };
 
     return (
-        <dialog id="my_modal_5" className="modal sm:modal-middle">
+        <dialog id="create_modal" className="modal sm:modal-middle">
             <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
                 <h3 className="font-bold text-lg">Create Doctor</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,49 +1,77 @@
+import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner";
-import { appointmentsAPI } from "../../../features/appointmentAPI";
+import { complaintsAPI, type TComplaint } from "../../../features/complaintAPI";
 
-type CreateAppointmentInputs = {
+type UpdateComplaintProps = {
+    complaint: TComplaint | null;
+};
+
+type UpdateComplaintInputs = {
     userId: number;
-    doctorId: number;
-    appointmentDate: string;
-    time: string;
-    totalAmount: number;
+    appointmentId: number;
+    subject: string;
+    description: string;
     status: string;
 };
 
 const schema = yup.object({
     userId: yup.number().required("User ID is required"),
-    doctorId: yup.number().required("Doctor ID is required"),
-    appointmentDate: yup.string().required("Appointment date is required"),
-    time: yup.string().required("Time is required"),
-    totalAmount: yup.number().required("Total amount is required"),
+    appointmentId: yup.number().required("Appointment ID is required"),
+    subject: yup.string().required("Subject is required"),
+    description: yup.string().required("Description is required"),
     status: yup.string().required("Status is required"),
 });
 
-const CreateAppointments = () => {
-    const [CreateAppointment, { isLoading }] = appointmentsAPI.useCreateAppointmentMutation();
-
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<CreateAppointmentInputs>({
+const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
+    const {
+        register,
+        handleSubmit,
+        reset,
+        setValue,
+        formState: { errors },
+    } = useForm<UpdateComplaintInputs>({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<CreateAppointmentInputs> = async (data) => {
-        try {
-            await CreateAppointment(data).unwrap();
-            toast.success("Appointment created successfully!");
+    const [updateComplaint, { isLoading }] = complaintsAPI.useUpdateComplaintMutation();
+
+    useEffect(() => {
+        if (complaint) {
+            setValue("userId", complaint.userId);
+            setValue("appointmentId", complaint.appointmentId);
+            setValue("subject", complaint.subject);
+            setValue("description", complaint.description);
+            setValue("status", complaint.status);
+        } else {
             reset();
-            (document.getElementById("create_modal") as HTMLDialogElement)?.close();
+        }
+    }, [complaint, reset, setValue]);
+
+    const onSubmit: SubmitHandler<UpdateComplaintInputs> = async (data) => {
+        try {
+            if (!complaint) {
+                toast.error("No complaint selected for update.");
+                return;
+            }
+
+            const response = await updateComplaint({ complaintId: complaint.complaintId, ...data });
+            console.log("Complaint updated successfully", response);
+            toast.success("Complaint updated successfully!");
+            reset();
+            (document.getElementById("update_modal") as HTMLDialogElement)?.close();
         } catch (error) {
-            toast.error("Failed to create appointment.");
+            console.error("Error updating complaint:", error);
+            toast.error("Failed to update complaint. Please try again.");
         }
     };
 
     return (
         <dialog id="create_modal" className="modal sm:modal-middle">
             <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
-                <h3 className="font-bold text-lg">Create Appointment</h3>
+                <h3 className="font-bold text-lg">Create Complaint</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
@@ -54,31 +82,31 @@ const CreateAppointments = () => {
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
-                            <span className="label-text text-white">Doctor ID</span>
+                            <span className="label-text text-white">Appointment ID</span>
                         </label>
-                        <input type="text" {...register("doctorId")} className="input input-bordered w-full max-w-xs" />
-                        {errors.doctorId && <span className="text-red-500">{errors.doctorId.message}</span>}
+                        <input type="text" {...register("appointmentId")} className="input input-bordered w-full max-w-xs" />
+                        {errors.appointmentId && <span className="text-red-500">{errors.appointmentId.message}</span>}
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
-                            <span className="label-text text-white">Appointment Date</span>
+                            <span className="label-text text-white">Subject</span>
                         </label>
-                        <input type="text" {...register("appointmentDate")} className="input input-bordered w-full max-w-xs" />
-                        {errors.appointmentDate && <span className="text-red-500">{errors.appointmentDate.message}</span>}
+                        <input type="text" {...register("description")} className="input input-bordered w-full max-w-xs" />
+                        {errors.subject && <span className="text-red-500">{errors.subject.message}</span>}
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
-                            <span className="label-text text-white">Time</span>
+                            <span className="label-text text-white">Description</span>
                         </label>
-                        <input type="text" {...register("time")} className="input input-bordered w-full max-w-xs" />
-                        {errors.time && <span className="text-red-500">{errors.time.message}</span>}
+                        <input type="text" {...register("description")} className="input input-bordered w-full max-w-xs" />
+                        {errors.description && <span className="text-red-500">{errors.description.message}</span>}
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
-                            <span className="label-text text-white">Total Amount</span>
+                            <span className="label-text text-white">Status</span>
                         </label>
-                        <input type="text" {...register("totalAmount")} className="input input-bordered w-full max-w-xs" />
-                        {errors.totalAmount && <span className="text-red-500">{errors.totalAmount.message}</span>}
+                        <input type="text" {...register("status")} className="input input-bordered w-full max-w-xs" />
+                        {errors.status && <span className="text-red-500">{errors.status.message}</span>}
                     </div>
                     <div className="form-control">
                         <label className="label cursor-pointer">
@@ -91,7 +119,7 @@ const CreateAppointments = () => {
                                         {...register("status")}
                                         className="radio radio-primary text-green-400"
                                     />
-                                    Pending
+                                    Open
                                 </label>
                                 <label className="flex items-center gap-1">
                                     <input
@@ -101,7 +129,7 @@ const CreateAppointments = () => {
                                         className="radio radio-primary  text-yellow-400"
                                         defaultChecked
                                     />
-                                    Confirmed
+                                    In Progress
                                 </label>
                                 <label className="flex items-center gap-1">
                                     <input
@@ -111,7 +139,17 @@ const CreateAppointments = () => {
                                         className="radio radio-primary  text-yellow-400"
                                         defaultChecked
                                     />
-                                    Cancelled
+                                    Resolved
+                                </label>
+                                <label className="flex items-center gap-1">
+                                    <input
+                                        type="radio"
+                                        value="false"
+                                        {...register("status")}
+                                        className="radio radio-primary  text-yellow-400"
+                                        defaultChecked
+                                    />
+                                    Closed
                                 </label>
                             </div>
                         </label>
@@ -127,10 +165,10 @@ const CreateAppointments = () => {
                         Close
                         </button>
                     </div>
-                    </form>
+                </form>
             </div>
         </dialog>
     )
 };
 
-export default CreateAppointments;
+export default UpdateComplaint;

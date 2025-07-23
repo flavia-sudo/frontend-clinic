@@ -34,7 +34,7 @@ const Doctors = () => {
                         (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()
                     }
                 >
-                    + Create Doctor
+                    Create Doctor
                 </button>
             </div>
 

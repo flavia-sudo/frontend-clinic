@@ -11,7 +11,7 @@ export type TComplaint = {
     createdAt: string;
     updatedAt: string;
 }
-export const complaintAPI = createApi({
+export const complaintsAPI = createApi({
     reducerPath: "complaintAPI",
     baseQuery: fetchBaseQuery({
         baseUrl: ApiDomain,
@@ -26,7 +26,7 @@ export const complaintAPI = createApi({
     }),
     tagTypes: ["complaint"],
     endpoints: (builder) => ({
-        createAppointment: builder.mutation<TComplaint, Partial<TComplaint>>({
+        createComplaint: builder.mutation<TComplaint, Partial<TComplaint>>({
             query: (newComplaint) => ({
                 url: "/complaint",
                 method: "POST",

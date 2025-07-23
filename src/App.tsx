@@ -9,6 +9,8 @@ import Profile from "./pages/Profile";
 import VerifyUser from "./pages/VerifyUser";
 import AdminDashboard from "./Dashboard/AdminDashboard/AdminDashboard";
 import Doctors from "./Dashboard/AdminDashboard/doctors/Doctors";
+import Appointments from "./Dashboard/AdminDashboard/appointments/Appointment";
+import Complaints from "./Dashboard/AdminDashboard/complaints/Complaint";
 
 function App() {
     return (
@@ -25,6 +27,10 @@ function App() {
                       <Route path="/admin" element={<AdminDashboard />}>
                         <Route index element={<Doctors />} /> 
                         <Route path="doctors" element={<Doctors />} />
+                        <Route index element={<Appointments />} />
+                        <Route path="appointments" element={<Appointments />} />
+                        <Route index element={<Complaints />} />
+                        <Route path="complaints" element={<Complaints />} />
                         {/* <Route path="bookings" element={<Bookings />} /> */}
                         {/* <Route path="settings" element={<Settings />} /> */}
                       </Route>
