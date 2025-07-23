@@ -12,6 +12,8 @@ import Doctors from "./Dashboard/AdminDashboard/doctors/Doctors";
 import Appointments from "./Dashboard/AdminDashboard/appointments/Appointment";
 import Complaints from "./Dashboard/AdminDashboard/complaints/Complaint";
 import Payments from "./Dashboard/AdminDashboard/payments/Payment";
+import Users from "./Dashboard/AdminDashboard/manageUsers/Users";
+import Prescriptions from "./Dashboard/AdminDashboard/prescriptions/Prescription";
 
 function App() {
     return (
@@ -34,7 +36,8 @@ function App() {
                         <Route path="complaints" element={<Complaints />} />
                         <Route index element={<Payments />} />
                         <Route path="payments" element={<Payments />} />
-                        {/* <Route path="bookings" element={<Bookings />} /> */}
+                        <Route path="users" element={<Users />} />
+                        <Route path='prescriptions' element={<Prescriptions />} />
                         {/* <Route path="settings" element={<Settings />} /> */}
                       </Route>
                       <Route path="*" element={<NotFound />} />

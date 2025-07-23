@@ -2,7 +2,7 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import { BsEmojiExpressionlessFill } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
-import { FaUserCheck } from "react-icons/fa6";
+import { FaPrescriptionBottle } from "react-icons/fa6";
 import type React from "react";
 
 export type DrawerData = {
@@ -38,15 +38,15 @@ export const adminDrawerData: DrawerData[] = [
         link: "payments"
     },
     {
+        id: "prescriptions",
+        name: "Prescriptions",
+        icon: FaPrescriptionBottle,
+        link: "prescriptions"
+    },
+    {
         id: "users",
         name: "Users",
         icon: FiUsers,
         link: "users"
-    },
-    {
-        id: "profile",
-        name: "Profile",
-        icon: FaUserCheck,
-        link: "profile"
     },
 ]

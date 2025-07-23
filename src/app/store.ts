@@ -2,6 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 // Import individual reducers for different parts of the state
 import authReducer from "../features/login/authSlice"; // Handles authentication state
 import { doctorsAPI } from "../features/doctorsAPI"; // Handles doctors API via RTK Query
+import { appointmentsAPI } from "../features/appointmentAPI";
+import { usersAPI } from "../features/userAPI";
+import { paymentAPI } from "../features/paymentAPI";
+import { complaintsAPI } from "../features/complaintAPI";
+import { prescriptionAPI } from "../features/prescriptionAPI";
 
 // Create and export the Redux store
 export const store = configureStore({
@@ -9,10 +14,21 @@ export const store = configureStore({
     reducer: {
         auth: authReducer, // auth slice handles login, register, user info, etc.
         [doctorsAPI.reducerPath]: doctorsAPI.reducer, // doctorsAPI slice handles fetching doctors via RTK Query
+        [appointmentsAPI.reducerPath]: appointmentsAPI.reducer,
+        [usersAPI.reducerPath]: usersAPI.reducer,
+        [paymentAPI.reducerPath]: paymentAPI.reducer,
+        [complaintsAPI.reducerPath]: complaintsAPI.reducer,
+        [prescriptionAPI.reducerPath]:prescriptionAPI.reducer
     },
     // Extend default middleware to include RTK Query's middleware for caching, polling, etc.
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(doctorsAPI.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(doctorsAPI.middleware)
+      .concat(appointmentsAPI.middleware)
+      .concat(usersAPI.middleware)
+      .concat(paymentAPI.middleware)
+      .concat(complaintsAPI.middleware)
+      .concat(prescriptionAPI.middleware),
 });
 
 // Define types for the entire Redux state and the dispatch function
