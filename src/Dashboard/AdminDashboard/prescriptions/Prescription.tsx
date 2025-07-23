@@ -77,7 +77,7 @@ const Prescriptions = () => {
                             </table>
                         </div>  
                 ) : (
-                    !prescriptionsLoading && !prescriptionsError && <p className="text-gray-600">No complaints found</p>
+                    !prescriptionsLoading && !prescriptionsError && <p className="text-gray-600">No prescriptions found</p>
                 )}
             </div>
         );

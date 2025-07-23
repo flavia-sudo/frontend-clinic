@@ -9,7 +9,7 @@ type UpdatePrescriptionProps = {
     prescription: TPrescription | null;
 };
 
-type UpdatePrescriptionInputs ={
+type UpdatePrescriptionInputs = {
     appointmentId: number;
     doctorId: number;
     patientId: number;

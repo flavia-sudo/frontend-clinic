@@ -14,6 +14,7 @@ import Complaints from "./Dashboard/AdminDashboard/complaints/Complaint";
 import Payments from "./Dashboard/AdminDashboard/payments/Payment";
 import Users from "./Dashboard/AdminDashboard/manageUsers/Users";
 import Prescriptions from "./Dashboard/AdminDashboard/prescriptions/Prescription";
+import Transactions from "./Dashboard/AdminDashboard/transactions/Transaction";
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                         <Route path="payments" element={<Payments />} />
                         <Route path="users" element={<Users />} />
                         <Route path='prescriptions' element={<Prescriptions />} />
+                        <Route path='transactions' element={<Transactions />} />
                         {/* <Route path="settings" element={<Settings />} /> */}
                       </Route>
                       <Route path="*" element={<NotFound />} />

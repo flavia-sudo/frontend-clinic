@@ -34,7 +34,7 @@ export const prescriptionAPI = createApi({
             invalidatesTags: ["Prescription"],
         }),
         getPrescriptions: builder.query<TPrescription[], void>({
-            query: () => "/prescription",
+            query: () => "/prescription_all",
             providesTags: ["Prescription"],
         }),
         updatePrescription: builder.mutation<TPrescription, Partial<TPrescription> & { prescriptionId: number }>({
