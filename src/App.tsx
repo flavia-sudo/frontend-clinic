@@ -11,6 +11,7 @@ import AdminDashboard from "./Dashboard/AdminDashboard/AdminDashboard";
 import Doctors from "./Dashboard/AdminDashboard/doctors/Doctors";
 import Appointments from "./Dashboard/AdminDashboard/appointments/Appointment";
 import Complaints from "./Dashboard/AdminDashboard/complaints/Complaint";
+import Payments from "./Dashboard/AdminDashboard/payments/Payment";
 
 function App() {
     return (
@@ -31,6 +32,8 @@ function App() {
                         <Route path="appointments" element={<Appointments />} />
                         <Route index element={<Complaints />} />
                         <Route path="complaints" element={<Complaints />} />
+                        <Route index element={<Payments />} />
+                        <Route path="payments" element={<Payments />} />
                         {/* <Route path="bookings" element={<Bookings />} /> */}
                         {/* <Route path="settings" element={<Settings />} /> */}
                       </Route>

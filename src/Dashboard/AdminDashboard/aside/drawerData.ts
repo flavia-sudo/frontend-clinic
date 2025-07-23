@@ -32,6 +32,12 @@ export const adminDrawerData: DrawerData[] = [
         link: "complaints"
     },
     {
+        id: "payments",
+        name: "Payments",
+        icon: FaCalendarCheck,
+        link: "payments"
+    },
+    {
         id: "users",
         name: "Users",
         icon: FiUsers,
