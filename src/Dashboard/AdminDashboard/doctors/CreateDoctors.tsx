@@ -1,7 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { doctorsAPI } from "../../../features/doctors/doctorsAPI";
+import { doctorsAPI } from "../../../features/doctorsAPI";
 import { toast } from "sonner";
 
 type CreateDoctorInputs = {

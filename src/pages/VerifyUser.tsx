@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router';
 import * as yup from 'yup';
-import { usersAPI } from '../features/users/userAPI';
+import { usersAPI } from '../features/userAPI';
 import { toast } from 'sonner';
 
 type VerifyInputs = {

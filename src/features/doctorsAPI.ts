@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import { ApiDomain } from "../../utils/APIDomain";
-import type { RootState } from "../../app/store";
+import { ApiDomain } from "../utils/APIDomain";
 
 export type TDoctor = {
     doctorId: number,
@@ -17,9 +16,8 @@ export const doctorsAPI = createApi({
     reducerPath: "doctorsAPI",
     baseQuery: fetchBaseQuery({
         baseUrl: ApiDomain,
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token
-            console.log(token);
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem('Token');
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`);
             }

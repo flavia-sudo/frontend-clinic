@@ -10,7 +10,7 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const token = localStorage.getItem("Token");
     const user = JSON.parse(localStorage.getItem("User") || "{}");
-    const isAdmin = user.isAdmin;
+    const isAdmin = user.role;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

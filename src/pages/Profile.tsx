@@ -15,14 +15,13 @@ const Profile = () => {
         phoneNumber: user.contactPhone || "",
         address: user.address || "",
     });
-    console.log(token);
 
     const navigate = useNavigate();
 
     const fullName = `${user.firstname || ""} ${user.lastname || ""}`;
     const initials = `${user.firstName?.[0] || ""}${user.lastName?.[0] || ""}`.toUpperCase();
     const accountType = user.role ? "Admin" : "Customer";
-    const verified = user.isVerified ? "Yes" : "No";
+    const verified = user.verified ? "Yes" : "No";
 
     useEffect(() => {
         if (!token || !user.userId) {

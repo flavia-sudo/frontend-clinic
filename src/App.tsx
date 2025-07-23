@@ -6,8 +6,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import AdminDashboard from "./pages/AdminDashboard";
 import VerifyUser from "./pages/VerifyUser";
+import AdminDashboard from "./Dashboard/AdminDashboard/AdminDashboard";
+import Doctors from "./Dashboard/AdminDashboard/doctors/Doctors";
 
 function App() {
     return (
@@ -21,8 +22,13 @@ function App() {
                       <Route path="/verify" element={<VerifyUser />} />
                       <Route path="/register" element={<Register />} />
                       <Route path="/profile" element={<Profile />} />
-                      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                      <Route path="*" element={<NotFound />} />                 
+                      <Route path="/admin" element={<AdminDashboard />}>
+                        <Route index element={<Doctors />} /> 
+                        <Route path="doctors" element={<Doctors />} />
+                        {/* <Route path="bookings" element={<Bookings />} /> */}
+                        {/* <Route path="settings" element={<Settings />} /> */}
+                      </Route>
+                      <Route path="*" element={<NotFound />} />
                     </Routes>
               </main>
           </div>

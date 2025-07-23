@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ChangeRole from "./ChangeRole";
-import { usersAPI, type TUser } from "../../../features/users/userAPI";
+import { usersAPI, type TUser } from "../../../features/userAPI";
 
 const Users = () => {
     const { data: usersData, isLoading, error } = usersAPI.useGetUsersQuery(

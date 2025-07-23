@@ -3,7 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner";
-import { doctorsAPI, type TDoctor } from "../../../features/doctors/doctorsAPI";
+import { doctorsAPI, type TDoctor } from "../../../features/doctorsAPI";
 
 type UpdateDoctorProps = {
     doctor: TDoctor | null;
@@ -65,7 +65,7 @@ const UpdateDoctor = ({ doctor }: UpdateDoctorProps) => {
 
     return (
         <dialog id="update_modal" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
+            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg position-absolute top-10">
                 <h3 className="font-bold text-lg">Update Doctor</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full max-w-xs">

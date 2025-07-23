@@ -1,4 +1,4 @@
-import { TbBrandBooking } from "react-icons/tb";
+import { FaCalendarCheck } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { FaUserCheck } from "react-icons/fa6";
@@ -21,7 +21,7 @@ export const adminDrawerData: DrawerData[] = [
     {
         id: "appointments",
         name: "Appointments",
-        icon: TbBrandBooking,
+        icon: FaCalendarCheck,
         link: "appointments"
     },
     {

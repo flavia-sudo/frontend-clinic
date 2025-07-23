@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { doctorsAPI, type TDoctor } from "../../../features/doctors/doctorsAPI";
+import { doctorsAPI, type TDoctor } from "../../../features/doctorsAPI";
 
 type DeleteDoctorProps = {
     doctor: TDoctor | null;
