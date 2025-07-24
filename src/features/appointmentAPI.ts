@@ -40,6 +40,10 @@ export const appointmentsAPI = createApi({
             query: () => '/appointment_all',
             providesTags: ['Appointments']
         }),
+        getUserAppointments: builder.query<TAppointment[], number>({
+            query: (userId) => `/appointment/user/${userId}`,
+            providesTags: ['Appointments']
+        }),
         updateAppointment: builder.mutation<TAppointment, Partial<TAppointment> & { appointmentId: number }>({
             query: (updatedAppointment) => ({
                 url: `/appointment/${updatedAppointment.appointmentId}`,

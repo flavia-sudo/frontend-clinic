@@ -15,6 +15,10 @@ import Payments from "./Dashboard/AdminDashboard/payments/Payment";
 import Users from "./Dashboard/AdminDashboard/manageUsers/Users";
 import Prescriptions from "./Dashboard/AdminDashboard/prescriptions/Prescription";
 import Transactions from "./Dashboard/AdminDashboard/transactions/Transaction";
+import UserDashboard from "./Dashboard/UserDashboard/UserDashboard";
+import UserAppointment from "./Dashboard/UserDashboard/appointment/UserAppointment";
+import UserComplaints from "./Dashboard/UserDashboard/complaints/UserComplaints";
+import UserPrescription from "./Dashboard/UserDashboard/prescription/UserPrescription";
 
 function App() {
     return (
@@ -31,16 +35,18 @@ function App() {
                       <Route path="/admin" element={<AdminDashboard />}>
                         <Route index element={<Doctors />} /> 
                         <Route path="doctors" element={<Doctors />} />
-                        <Route index element={<Appointments />} />
                         <Route path="appointments" element={<Appointments />} />
-                        <Route index element={<Complaints />} />
                         <Route path="complaints" element={<Complaints />} />
-                        <Route index element={<Payments />} />
                         <Route path="payments" element={<Payments />} />
                         <Route path="users" element={<Users />} />
                         <Route path='prescriptions' element={<Prescriptions />} />
                         <Route path='transactions' element={<Transactions />} />
-                        {/* <Route path="settings" element={<Settings />} /> */}
+                      </Route>
+                      <Route path="/dashboard" element={<UserDashboard />}>
+                        <Route index element={<UserAppointment />} /> 
+                        <Route path="appointments" element={<UserAppointment />} />
+                        <Route path="complaints" element={<UserComplaints />} />
+                        <Route path="prescriptions" element={<UserPrescription />} />
                       </Route>
                       <Route path="*" element={<NotFound />} />
                     </Routes>

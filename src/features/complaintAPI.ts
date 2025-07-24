@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiDomain } from "../utils/APIDomain";
+import type { get } from "react-hook-form";
 
 export type TComplaint = {
     complaintId: number;
@@ -36,6 +37,10 @@ export const complaintsAPI = createApi({
         }),
         getComplaints: builder.query<TComplaint[], void>({
             query: () => `/complaint_all`,
+            providesTags: ["complaint"],
+        }),
+        getUserComplaints: builder.query<TComplaint[], number>({
+            query: (userId) => `/complaint/user/${userId}`,
             providesTags: ["complaint"],
         }),
         updateComplaint: builder.mutation<TComplaint, Partial<TComplaint> & { complaintId: number }>({
