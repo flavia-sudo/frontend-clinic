@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiDomain } from "../utils/APIDomain";
-import type { RootState } from "../app/store";
 
 export type TUser = {
     userId: number;
@@ -27,8 +26,8 @@ export const usersAPI = createApi({
     reducerPath: 'usersAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: ApiDomain,
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token;
+        prepareHeaders: (headers,) => {
+            const token = localStorage.getItem('Token');
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`);
             }
@@ -69,6 +68,11 @@ export const usersAPI = createApi({
 
         getUserById: builder.query<TUser, number>({
             query: (userId) => `/user/${userId}`,
+        }),
+
+        getDoctors: builder.query<{data: TUser[]}, void>({
+            query: () => '/users/doctors_all',
+            providesTags: ['Users']
         }),
     })
 })

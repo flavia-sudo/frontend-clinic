@@ -14,7 +14,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-      useEffect(() => {
+    useEffect(() => {
         setIsLoggedIn(!!token);
     }, [token, user]);
 
