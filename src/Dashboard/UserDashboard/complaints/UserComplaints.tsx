@@ -7,11 +7,15 @@ import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
 const Complaints = () => {
+    const userString = localStorage.getItem("User");
+    const user = userString ? JSON.parse(userString) : null;
+    const userId = user?.userId;
+
     const {
         data: complaintsData,
         isLoading: complaintsLoading,
         error: complaintsError,
-    } = complaintsAPI.useGetComplaintsQuery(undefined, {
+    } = complaintsAPI.useGetUserComplaintsQuery(userId, {
         refetchOnMountOrArgChange: true,
         pollingInterval: 60000
     });
