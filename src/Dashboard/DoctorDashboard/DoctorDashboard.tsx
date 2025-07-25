@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa6";
 import { IoCloseSharp } from "react-icons/io5";
 import { useState } from "react";
 
-const UserDashboard = () => {
+const DoctorDashboard = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawerToggle = () => {
     setDrawerOpen((prev) => !prev);
@@ -42,4 +42,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default DoctorDashboard;

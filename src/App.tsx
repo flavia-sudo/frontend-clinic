@@ -19,6 +19,9 @@ import UserDashboard from "./Dashboard/UserDashboard/UserDashboard";
 import UserAppointment from "./Dashboard/UserDashboard/appointment/UserAppointment";
 import UserComplaints from "./Dashboard/UserDashboard/complaints/UserComplaints";
 import UserPrescription from "./Dashboard/UserDashboard/prescription/UserPrescription";
+import DoctorDashboard from "./Dashboard/DoctorDashboard/DoctorDashboard";
+import DoctorAppointment from "./Dashboard/DoctorDashboard/appointment/DoctorAppointment";
+import DoctorPrescription from "./Dashboard/DoctorDashboard/prescription/DoctorPrescription";
 
 function App() {
     return (
@@ -47,6 +50,11 @@ function App() {
                         <Route path="appointments" element={<UserAppointment />} />
                         <Route path="complaints" element={<UserComplaints />} />
                         <Route path="prescriptions" element={<UserPrescription />} />
+                      </Route>
+                      <Route path="/doctor" element={<DoctorDashboard />}>
+                        <Route index element={<DoctorAppointment />} /> 
+                        <Route path="appointments" element={<DoctorAppointment />} />
+                        <Route path="prescriptions" element={<DoctorPrescription />} />
                       </Route>
                       <Route path="*" element={<NotFound />} />
                     </Routes>

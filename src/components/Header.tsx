@@ -10,7 +10,8 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const token = localStorage.getItem("Token");
     const user = JSON.parse(localStorage.getItem("User") || "{}");
-    const isAdmin = user.role;
+    const isAdmin = user.role === "admin";
+    const isDoctor = user.role === "doctor";
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -55,6 +56,11 @@ const Header = () => {
                     {isLoggedIn && (
                         <NavLink to="/dashboard" className={getLinkClass}>
                             Dashboard
+                        </NavLink>
+                    )}
+                    {isDoctor && (
+                        <NavLink to="/doctor" className={getLinkClass}>
+                            Doctor
                         </NavLink>
                     )}
                     {isAdmin && (
@@ -131,6 +137,15 @@ const Header = () => {
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Dashboard
+                            </NavLink>
+                        )}
+                        {isDoctor && (
+                            <NavLink
+                                to="/doctor"
+                                className={`${getLinkClass} block text-black`}
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Doctor
                             </NavLink>
                         )}
                         {isAdmin && (
