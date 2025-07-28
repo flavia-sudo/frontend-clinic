@@ -6,7 +6,7 @@ export type TPrescription = {
     appointmentId: number;
     doctorId: number;
     patientId: number;
-    notes: string;
+    prescription: string;
     createdAt: string;
     updatedAt: string;
 }

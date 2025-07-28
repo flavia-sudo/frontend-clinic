@@ -18,9 +18,6 @@ const Prescriptions = () => {
             <div className="p-4">
                 <div className="flex justify-between mb-4">
                     <h2 className="text-2xl font-bold">Prescriptions</h2>
-                    <button className="btn btn-primary" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
-                        Create Prescription
-                    </button>
                 </div>
         
                 {prescriptionsLoading && <p className="text-gray-600">Loading prescriptions...</p>}
@@ -43,7 +40,7 @@ const Prescriptions = () => {
                                             <td className="px-6 py-4">{prescription.appointmentId}</td>
                                             <td className="px-6 py-4">{prescription.doctorId}</td>
                                             <td className="px-6 py-4">{prescription.patientId}</td>
-                                            <td className="px-6 py-4">{prescription.notes}</td>
+                                            <td className="px-6 py-4">{prescription.prescription}</td>
                                         </tr>
                                     ))}
                                 </tbody>

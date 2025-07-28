@@ -14,7 +14,7 @@ type UpdateComplaintInputs = {
     appointmentId: number;
     subject: string;
     description: string;
-    status: string;
+    isPending: boolean;
 };
 
 const schema = yup.object({
@@ -22,7 +22,7 @@ const schema = yup.object({
     appointmentId: yup.number().required("Appointment ID is required"),
     subject: yup.string().required("Subject is required"),
     description: yup.string().required("Description is required"),
-    status: yup.string().required("Status is required"),
+    isPending: yup.string().required("Status is required"),
 });
 
 const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
@@ -44,7 +44,7 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
             setValue("appointmentId", complaint.appointmentId);
             setValue("subject", complaint.subject);
             setValue("description", complaint.description);
-            setValue("status", complaint.status);
+            setValue("isPending", complaint.isPending);
         } else {
             reset();
         }
@@ -105,8 +105,8 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
                         <label className="label">
                             <span className="label-text text-white">Status</span>
                         </label>
-                        <input type="text" {...register("status")} className="input input-bordered w-full max-w-xs" />
-                        {errors.status && <span className="text-red-500">{errors.status.message}</span>}
+                        <input type="text" {...register("isPending")} className="input input-bordered w-full max-w-xs" />
+                        {errors.isPending && <span className="text-red-500">{errors.isPending.message}</span>}
                     </div>
                     <div className="form-control">
                         <label className="label cursor-pointer">
@@ -116,7 +116,7 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
                                     <input
                                         type="radio"
                                         value="true"
-                                        {...register("status")}
+                                        {...register("isPending")}
                                         className="radio radio-primary text-green-400"
                                     />
                                     Open

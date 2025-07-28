@@ -18,6 +18,8 @@ interface User {
   verificationCode: string | null;
   verified: boolean;
   token: string;
+  specialization?: string | null;
+  availableDays?: string | null;
 }
 
 // Defining the shape of the authentication state

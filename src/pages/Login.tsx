@@ -130,6 +130,7 @@ const Login = () => {
                     <div>
                         <button
                             type="submit"
+                            onClick={() => handleSubmit}
                             className="w-full bg-purple-800 hover:bg-purple-700 cursor-pointer text-white font-semibold px-4 py-2 rounded-md transition-colors duration-300 shadow-lg"
                         >
                             Sign In

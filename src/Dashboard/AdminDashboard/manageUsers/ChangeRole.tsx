@@ -75,6 +75,7 @@ const ChangeRole = ({ user }: ChangeRoleProps) => {
                     >
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
+                        <option value="doctor">Doctor</option>
                     </select>
                     {errors.role && (
                         <span className="text-sm text-red-700">{errors.role.message}</span>

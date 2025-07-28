@@ -57,7 +57,7 @@ const Register = () => {
             phoneNumber,
             address,
             password,
-            role: "user",
+            role: "admin",
         };
 
         try {
@@ -324,6 +324,7 @@ const Register = () => {
                                 <div>
                                     <button
                                         type="submit"
+                                        onClick={() => navigate("/")}
                                         className="w-full px-4 py-2 font-semibold text-white transition-colors duration-300 bg-purple-800 rounded-md shadow-lg hover:bg-purple-700"
                                     >
                                         Verify

@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiDomain } from "../utils/APIDomain";
-import type { get } from "react-hook-form";
 
 export type TComplaint = {
     complaintId: number;
@@ -8,9 +7,9 @@ export type TComplaint = {
     appointmentId: number;
     subject: string;
     description: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
+    isPending: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }
 export const complaintsAPI = createApi({
     reducerPath: "complaintAPI",

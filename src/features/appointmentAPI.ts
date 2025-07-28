@@ -8,7 +8,7 @@ export type TAppointment = {
     appointmentDate: string;
     time: string;
     totalAmount: number;
-    status: string;
+    isCompleted: boolean;
     createdAt: string;
     updatedAt: string;
 }

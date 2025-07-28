@@ -1,10 +1,4 @@
-import { useState } from "react";
 import { appointmentsAPI, type TAppointment } from "../../../features/appointmentAPI";
-import CreateAppointments from "./CreateAppointment";
-import UpdateAppointments from "./UpdateAppointment";
-import DeleteAppointments from "./DeleteAppointment";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
 
 const Appointments = () => {
     const userString = localStorage.getItem("User");
@@ -19,32 +13,13 @@ const Appointments = () => {
         refetchOnMountOrArgChange: true,
         pollingInterval: 60000,
     });
-    
-    const [selectedAppointment, setSelectedAppointment] = useState<TAppointment | null>(null);
-    const [appointmentToDelete, setAppointmentToDelete] = useState<TAppointment | null>(null);
 
-    const handleEdit = (appointment: TAppointment) => {
-        setSelectedAppointment(appointment);
-        (document.getElementById("update_modal") as HTMLDialogElement)?.showModal();
-    };
 
     return (
         <div className="p-6 bg-white rounded-lg shadow-md position-relative">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800">Appointments List</h2>
-                <button
-                    className="btn bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-md transition duration-200"
-                    onClick={() =>
-                        (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()
-                    }
-                >
-                    Create Appointment
-                </button>
                 </div>
-
-                <CreateAppointments />
-                <UpdateAppointments appointment={selectedAppointment} />
-                <DeleteAppointments appointment={appointmentToDelete} />
 
                 {appointmentsLoading && <p className="text-gray-600">Loading appointments...</p>}
                 {appointmentsError && <p className="text-red-600">Error loading appointments</p>}
@@ -71,22 +46,11 @@ const Appointments = () => {
                                         <td className="px-6 py-4">{appointment.appointmentDate}</td>
                                         <td className="px-6 py-4">{appointment.time}</td>
                                         <td className="px-6 py-4">{appointment.totalAmount}</td>
-                                        <td className="px-6 py-4">{appointment.status}</td>
+                                        <td className="px-6 py-4">{appointment.isCompleted}</td>
                                         <td className="px-6 py-4">
                                             <button
-                                                className="btn btn-sm bg-blue-600 hover:bg-blue-800 text-white rounded-md p-2"
-                                                onClick={() => handleEdit(appointment)}
-                                            >
-                                                <FaEdit size={20} />
-                                            </button>
-                                            <button
-                                                className="btn btn-sm bg-red-600 hover:bg-red-700 text-white rounded-md p-2"
-                                                onClick={() => { setAppointmentToDelete(appointment);
-                                                (document.getElementById("delete_modal") as HTMLDialogElement)?.showModal();
-                                                }}
-                                            >
-                                                <MdDeleteForever size={20} />
-                                            </button>
+                                                className="btn bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-md transition duration-200"
+                                            >View</button>
                                         </td>
                                     </tr>
                                 ))}
