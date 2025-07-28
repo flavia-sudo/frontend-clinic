@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { appointmentsAPI, type TAppointment } from "../../../features/appointmentAPI";
-import CreateAppointments from "./CreateAppointment";
 import UpdateAppointments from "./UpdateAppointment";
 import DeleteAppointments from "./DeleteAppointment";
 import { FaEdit } from "react-icons/fa";
@@ -28,18 +27,7 @@ const Appointments = () => {
         <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
           Appointments List
         </h2>
-        <button
-          className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm"
-          onClick={() =>
-            (
-              document.getElementById('create_modal') as HTMLDialogElement
-            )?.showModal()
-          }
-        >
-          + Create Doctor
-        </button>
       </div>
-      <CreateAppointments />
       <UpdateAppointments appointment={selectedAppointment} />
       <DeleteAppointments appointment={selectedAppointment} />
       {appointmentsLoading && <p className="text-gray-600">Loading doctors...</p>}

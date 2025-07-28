@@ -9,8 +9,8 @@ export type TAppointment = {
     time: string;
     totalAmount: number;
     isCompleted: boolean;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export const appointmentsAPI = createApi({
