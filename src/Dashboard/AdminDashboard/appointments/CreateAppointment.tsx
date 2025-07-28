@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner";
 import { appointmentsAPI } from "../../../features/appointmentAPI";
-import { usersAPI, type TUser } from "../../../features/userAPI"; // ✅ import user API
+import { usersAPI, type TUser } from "../../../features/userAPI"; // import user API
 
 type CreateAppointmentInputs = {
   userId: number;

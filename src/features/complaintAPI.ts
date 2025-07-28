@@ -7,7 +7,7 @@ export type TComplaint = {
     appointmentId: number;
     subject: string;
     description: string;
-    isPending: boolean;
+    status: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

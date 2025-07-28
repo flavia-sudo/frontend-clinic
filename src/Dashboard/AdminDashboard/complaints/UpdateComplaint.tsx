@@ -14,7 +14,7 @@ type UpdateComplaintInputs = {
     appointmentId: number;
     subject: string;
     description: string;
-    status: string;
+    status: boolean;
 };
 
 const schema = yup.object({
@@ -22,7 +22,7 @@ const schema = yup.object({
     appointmentId: yup.number().required("Appointment ID is required"),
     subject: yup.string().required("Subject is required"),
     description: yup.string().required("Description is required"),
-    status: yup.string().required("Status is required"),
+    status: yup.boolean().required("Status is required"),
 });
 
 const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
@@ -68,101 +68,73 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
         }
     };
 
+    const handleClose = () => {
+    ;(document.getElementById('create_modal') as HTMLDialogElement)?.close()
+  }
+
     return (
-        <dialog id="create_modal" className="modal sm:modal-middle">
-            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
-                <h3 className="font-bold text-lg">Create Complaint</h3>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text text-white">User ID</span>
+        <dialog id="create_modal" className="fixed inset-0 z-50 bg-transparent">
+        <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={handleClose}
+        ></div>
+            <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-6 w-full max-w-md z-50">
+                <h3 className="font-bold text-xl mb-4 text-gray-800">Create Complaint</h3>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <div className="form-control w-full">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        User ID
                         </label>
-                        <input type="text" {...register("userId")} className="input input-bordered w-full max-w-xs" />
-                        {errors.userId && <span className="text-red-500">{errors.userId.message}</span>}
+                        <input type="number" {...register("userId")} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        {errors.userId && <span className="text-red-500 text-xs mt-1">{errors.userId.message}</span>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text text-white">Appointment ID</span>
+                    <div className="form-control w-full">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Appointment ID
                         </label>
-                        <input type="text" {...register("appointmentId")} className="input input-bordered w-full max-w-xs" />
-                        {errors.appointmentId && <span className="text-red-500">{errors.appointmentId.message}</span>}
+                        <input type="number" {...register("appointmentId")} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        {errors.appointmentId && <span className="text-red-500 text-xs mt-1">{errors.appointmentId.message}</span>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text text-white">Subject</span>
+                    <div className="form-control w-full">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Subject
                         </label>
-                        <input type="text" {...register("description")} className="input input-bordered w-full max-w-xs" />
-                        {errors.subject && <span className="text-red-500">{errors.subject.message}</span>}
+                        <input type="text" {...register("description")} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        {errors.subject && <span className="text-red-500 text-xs mt-1">{errors.subject.message}</span>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text text-white">Description</span>
+                    <div className="form-control w-full">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Description
                         </label>
-                        <input type="text" {...register("description")} className="input input-bordered w-full max-w-xs" />
-                        {errors.description && <span className="text-red-500">{errors.description.message}</span>}
+                        <input type="text" {...register("description")} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                        {errors.description && <span className="text-red-500 text-xs mt-1">{errors.description.message}</span>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text text-white">Status</span>
-                        </label>
-                        <input type="text" {...register("status")} className="input input-bordered w-full max-w-xs" />
-                        {errors.status && <span className="text-red-500">{errors.status.message}</span>}
+                    <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select
+                        {...register("status")}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                        <option value="true">Pending</option>
+                        <option value="false">Solved</option>
+                    </select>
+                    {errors.status && <span className="text-red-500 text-xs">{errors.status.message}</span>}
                     </div>
-                    <div className="form-control">
-                        <label className="label cursor-pointer">
-                            <span className="label-text mr-4 text-white">Status</span>
-                            <div className="flex gap-4">
-                                <label className="flex items-center gap-1">
-                                    <input
-                                        type="radio"
-                                        value="true"
-                                        {...register("status")}
-                                        className="radio radio-primary text-green-400"
-                                    />
-                                    Open
-                                </label>
-                                <label className="flex items-center gap-1">
-                                    <input
-                                        type="radio"
-                                        value="false"
-                                        {...register("status")}
-                                        className="radio radio-primary  text-yellow-400"
-                                        defaultChecked
-                                    />
-                                    In Progress
-                                </label>
-                                <label className="flex items-center gap-1">
-                                    <input
-                                        type="radio"
-                                        value="false"
-                                        {...register("status")}
-                                        className="radio radio-primary  text-yellow-400"
-                                        defaultChecked
-                                    />
-                                    Resolved
-                                </label>
-                                <label className="flex items-center gap-1">
-                                    <input
-                                        type="radio"
-                                        value="false"
-                                        {...register("status")}
-                                        className="radio radio-primary  text-yellow-400"
-                                        defaultChecked
-                                    />
-                                    Closed
-                                </label>
-                            </div>
-                        </label>
-                    </div>
-                    {errors.status && (
-                        <span className="text-sm text-red-700">{errors.status.message}</span>
-                    )}
-                    <div className="modal-action">
-                        <button type="submit" className="btn btn-primary" disabled={isLoading}>
-                            {isLoading ? "Creating..." : "Create"}
+                    {/* Action buttons */}
+                    <div className="flex justify-end space-x-3 pt-4">
+                        <button
+                        type="button"
+                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
+                        onClick={handleClose}
+                        >
+                        Cancel
                         </button>
-                        <button type="button" className="btn" onClick={() => (document.getElementById("update_modal") as HTMLDialogElement)?.close()}>
-                        Close
+                        <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+                        >
+                        {isLoading ? "Updating..." : "Update Complaint"}
                         </button>
                     </div>
                 </form>

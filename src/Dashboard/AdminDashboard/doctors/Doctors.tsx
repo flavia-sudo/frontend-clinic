@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { usersAPI, type TUser } from '../../../features/userAPI'
 import CreateDoctors from './CreateDoctors'
 import UpdateDoctors from './UpdateDoctors'

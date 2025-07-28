@@ -30,8 +30,8 @@ const Appointments = () => {
       </div>
       <UpdateAppointments appointment={selectedAppointment} />
       <DeleteAppointments appointment={selectedAppointment} />
-      {appointmentsLoading && <p className="text-gray-600">Loading doctors...</p>}
-      {appointmentsError && <p className="text-red-600">Error loading doctors</p>}
+      {appointmentsLoading && <p className="text-gray-600">Loading appointments...</p>}
+      {appointmentsError && <p className="text-red-600">Error loading appointments</p>}
       {Array.isArray(appointmentsData) && appointmentsData.length > 0 ? (
         <div className="overflow-x-auto rounded-lg border border-gray-200">
           <table className="min-w-full text-sm text-gray-800">
@@ -86,7 +86,7 @@ const Appointments = () => {
       ) : (
         !appointmentsLoading && (
           <p className="text-gray-600 mt-6 text-center text-base">
-            No doctors found.
+            No appointments found.
           </p>
         )
       )}
