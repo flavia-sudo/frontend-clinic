@@ -1,15 +1,10 @@
-import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner";
-import { appointmentsAPI, type TAppointment } from "../../../features/appointmentAPI";
+import { appointmentsAPI } from "../../../features/appointmentAPI";
 
-type UpdateAppointmentProps = {
-    appointment: TAppointment | null;
-};
-
-type UpdateAppointmentInputs = {
+type CreateAppointmentInputs = {
     userId: number;
     doctorId: number;
     appointmentDate: string;
@@ -27,54 +22,28 @@ const schema = yup.object({
     status: yup.string().required("Status is required"),
 });
 
-const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: { errors },
-        reset,
-    } = useForm<UpdateAppointmentInputs>({
+const CreateAppointments = () => {
+    const [CreateAppointment, { isLoading }] = appointmentsAPI.useCreateAppointmentMutation();
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<CreateAppointmentInputs>({
         resolver: yupResolver(schema),
     });
 
-    const [updateAppointment, { isLoading }] = appointmentsAPI.useUpdateAppointmentMutation();
-
-    useEffect(() => {
-        if (appointment) {
-            setValue("userId", appointment.userId);
-            setValue("doctorId", appointment.doctorId);
-            setValue("appointmentDate", appointment.appointmentDate);
-            setValue("time", appointment.time);
-            setValue("totalAmount", appointment.totalAmount);
-            setValue("status", appointment.status);
-        } else {
-            reset();
-        }
-    }, [appointment, setValue, reset]);
-
-    const onSubmit: SubmitHandler<UpdateAppointmentInputs> = async (data) => {
+    const onSubmit: SubmitHandler<CreateAppointmentInputs> = async (data) => {
         try {
-            if (!appointment) {
-                toast.error("No appointment selected for update.");
-                return;
-            }
-
-            const response = await updateAppointment({ appointmentId: appointment.appointmentId, ...data });
-            console.log("Appointment updated successfully", response);
-            toast.success("Appointment updated successfully!");
+            await CreateAppointment(data).unwrap();
+            toast.success("Appointment created successfully!");
             reset();
-            (document.getElementById("update_modal") as HTMLDialogElement)?.close();
+            (document.getElementById("create_modal") as HTMLDialogElement)?.close();
         } catch (error) {
-            console.error("Error updating appointment:", error);
-            toast.error("Failed to update appointment. Please try again.");
+            toast.error("Failed to create appointment.");
         }
     };
 
     return (
-        <dialog id="update_modal" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg position-absolute top-10">
-                <h3 className="font-bold text-lg">Update Appointment</h3>
+        <dialog id="create_modal" className="modal sm:modal-middle">
+            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
+                <h3 className="font-bold text-lg">Create Appointment</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
@@ -152,7 +121,7 @@ const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
                     )}
                     <div className="modal-action">
                         <button type="submit" className="btn btn-primary" disabled={isLoading}>
-                             {isLoading ? "Updating..." : "Update"}
+                            {isLoading ? "Creating..." : "Create"}
                         </button>
                         <button type="button" className="btn" onClick={() => (document.getElementById("update_modal") as HTMLDialogElement)?.close()}>
                         Close
@@ -164,4 +133,4 @@ const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
     )
 };
 
-export default UpdateAppointment;
+export default CreateAppointments;

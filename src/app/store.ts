@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 // Import individual reducers for different parts of the state
 import authReducer from "../features/login/authSlice"; // Handles authentication state
-import { doctorsAPI } from "../features/doctorsAPI"; // Handles doctors API via RTK Query
 import { appointmentsAPI } from "../features/appointmentAPI";
 import { usersAPI } from "../features/userAPI";
 import { paymentAPI } from "../features/paymentAPI";
@@ -14,7 +13,6 @@ export const store = configureStore({
     // Define all slices (reducers) that make up the global Redux state
     reducer: {
         auth: authReducer, // auth slice handles login, register, user info, etc.
-        [doctorsAPI.reducerPath]: doctorsAPI.reducer, // doctorsAPI slice handles fetching doctors via RTK Query
         [appointmentsAPI.reducerPath]: appointmentsAPI.reducer,
         [usersAPI.reducerPath]: usersAPI.reducer,
         [paymentAPI.reducerPath]: paymentAPI.reducer,
@@ -25,7 +23,6 @@ export const store = configureStore({
     // Extend default middleware to include RTK Query's middleware for caching, polling, etc.
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(doctorsAPI.middleware)
       .concat(appointmentsAPI.middleware)
       .concat(usersAPI.middleware)
       .concat(paymentAPI.middleware)
