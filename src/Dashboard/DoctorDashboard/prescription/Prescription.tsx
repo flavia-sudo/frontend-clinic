@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { prescriptionAPI, type TPrescription } from "../../../features/prescriptionAPI";
-import UpdatePrescription from "../../DoctorDashboard/prescription/UpdatePrescription";
-import DeletePrescription from "./DeletePrescription";
+import CreatePrescription from "./CreatePrescription";
+import UpdatePrescription from "./UpdatePrescription";
+import DeletePrescription from "../../AdminDashboard/prescriptions/DeletePrescription";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -27,11 +28,12 @@ const Prescriptions = () => {
             <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Prescriptions List</h2>
-                    {/* <button className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
+                    <button className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
                        + Create Prescription
-                    </button> */}
+                    </button>
                 </div>
     
+                <CreatePrescription />
                 <UpdatePrescription prescription={selectedPrescription} />
                 <DeletePrescription prescription={prescriptionToDelete} />
     
