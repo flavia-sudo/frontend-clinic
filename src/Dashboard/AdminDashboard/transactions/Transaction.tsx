@@ -25,11 +25,11 @@ const Transactions = () => {
     };
 
     return (
-        <div className="p-4">
-            <div className="flex justify-between mb-4">
-                <h2 className="text-2xl font-bold">Transactions</h2>
-                <button className="btn btn-primary" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
-                    Create Transaction
+        <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Transactions List</h2>
+                <button className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
+                   + Create Transaction
                 </button>
             </div>
 
@@ -42,45 +42,45 @@ const Transactions = () => {
 
             {Array.isArray(transactionsData) && transactionsData.length > 0 ? (
                 <div className="overflow-x-auto rounded-md border border-gray-200">
-                                            <table className="min-w-full table-auto text-left text-sm text-gray-800">
-                                                <thead className="bg-gray-100 text-gray-600 uppercase tracking-wider">
-                                                    <tr>
-                                                        <th className="px-6 py-3">User ID</th>
-                                                        <th className="px-6 py-3">Transaction Name</th>
-                                                        <th className="px-6 py-3">Amount</th>
-                                                        <th className="px-6 py-3">Status</th>
-                                                        <th className="px-6 py-3">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-gray-200 bg-white">
-                                                    {transactionsData.map((transaction: TTransaction) => (
-                                                        <tr key={transaction.transactionId} className="hover:bg-gray-50 transition">
-                                                            <td className="px-6 py-4">{transaction.userId}</td>
-                                                            <td className="px-6 py-4">{transaction.transactionName}</td>
-                                                            <td className="px-6 py-4">{transaction.amount}</td>
-                                                            <td className="px-6 py-4">{transaction.status}</td>
-                                                            <td className="px-6 py-4">
-                                                                <button className="btn btn-sm bg-blue-600 hover:bg-blue-800 text-white rounded-md p-2" onClick={() => handleEdit(transaction)}>
-                                                                    <FaEdit />
-                                                                </button>
-                                                                <button 
-                                                                className="btn btn-sm bg-red-600 hover:bg-red-700 text-white rounded-md p-2"
-                                                                onClick={() => { setTransactionToDelete(transaction);
-                                                                    (document.getElementById("delete_modal") as HTMLDialogElement)?.showModal();
-                                                                }}>
-                                                                    <MdDeleteForever />
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>  
-                                ) : (
-                                    !transactionsLoading && !transactionsError && <p className="text-gray-600">No transactions found</p>
-                                )}
-                            </div>
-                        );
-                    };
+                        <table className="min-w-full text-sm text-gray-800">
+                            <thead className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                                <tr>
+                                    <th className="px-4 py-4 text-left">User ID</th>
+                                    <th className="px-4 py-4 text-left">Transaction Name</th>
+                                    <th className="px-4 py-4 text-left">Amount</th>
+                                    <th className="px-4 py-4 text-left">Status</th>
+                                    <th className="px-4 py-4 text-left">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200 bg-white">
+                                    {transactionsData.map((transaction: TTransaction) => (
+                                    <tr key={transaction.transactionId} className="hover:bg-gray-50 transition">
+                                    <td className="px-4 py-3">{transaction.userId}</td>
+                                    <td className="px-4 py-3">{transaction.transactionName}</td>
+                                    <td className="px-4 py-3">{transaction.amount}</td>
+                                    <td className="px-4 py-3">{transaction.status}</td>
+                                    <td className="px-4 py-3">
+                                        <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300" onClick={() => handleEdit(transaction)}>
+                                            <FaEdit />
+                                        </button>
+                                        <button 
+                                            className="cursor-pointer bg-red-600 hover:bg-red-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-red-300"
+                                            onClick={() => { setTransactionToDelete(transaction);
+                                            (document.getElementById("delete_modal") as HTMLDialogElement)?.showModal();
+                                        }}>
+                                            <MdDeleteForever />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>  
+            ) : (
+                !transactionsLoading && !transactionsError && <p className="text-gray-600 mt-6 text-center text-base">No transactions found</p>
+             )}
+        </div>
+    );
+};
                     
-                export default Transactions;
+export default Transactions;

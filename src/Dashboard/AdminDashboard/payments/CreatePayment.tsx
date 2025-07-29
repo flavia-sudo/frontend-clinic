@@ -83,14 +83,15 @@ const CreatePayments = () => {
                         {errors.paymentDate && <span className="text-red-500 text-xs">{errors.paymentDate.message}</span>}
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                        <input
-                        type="text"
-                        placeholder="e.g. pending"
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select
                         {...register("status")}
-                        className="input input-bordered w-full"
-                        />
-                        {errors.status && <p className="text-red-500 text-xs">{errors.status.message}</p>}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                        <option value="true">Pending</option>
+                        <option value="false">Confirmed</option>
+                    </select>
+                    {errors.status && <span className="text-red-500 text-xs">{errors.status.message}</span>}
                     </div>
                     {/* Action buttons */}
                     <div className="flex justify-end space-x-3 pt-4">
@@ -106,7 +107,7 @@ const CreatePayments = () => {
                         disabled={isLoading}
                         className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
                         >
-                        {isLoading ? "Creating..." : "Create Appointment"}
+                        {isLoading ? "Creating..." : "Create Payment"}
                         </button>
                     </div>
                     </form>

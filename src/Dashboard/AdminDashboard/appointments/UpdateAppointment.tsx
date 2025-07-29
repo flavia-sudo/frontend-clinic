@@ -15,7 +15,7 @@ type UpdateAppointmentInputs = {
   appointmentDate: string;
   time: string;
   totalAmount: number;
-  isCompleted: boolean;
+  status: boolean;
 };
 
 const schema = yup.object({
@@ -24,7 +24,7 @@ const schema = yup.object({
   appointmentDate: yup.string().required("Appointment date is required"),
   time: yup.string().required("Time is required"),
   totalAmount: yup.number().required("Total amount is required"),
-  isCompleted: yup.boolean().required("Status is required"),
+  status: yup.boolean().required("Status is required"),
 });
 
 const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
@@ -50,7 +50,7 @@ const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
         const formattedTime = parsedTime.toTimeString().slice(0, 5); // "14:30"
       setValue("time", formattedTime);
       setValue("totalAmount", appointment.totalAmount);
-      setValue("isCompleted", appointment.isCompleted);
+      setValue("status", appointment.isCompleted);
     } else {
       reset();
     }
@@ -134,15 +134,15 @@ const UpdateAppointment = ({ appointment }: UpdateAppointmentProps) => {
           </div>
 
             <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Is Completed</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
             <select
-                {...register("isCompleted")}
+                {...register("status")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
             >
-                <option value="true">Completed</option>
-                <option value="false">Not Completed</option>
+                <option value="true">Confirmed</option>
+                <option value="false">Not Confirmed</option>
             </select>
-            {errors.isCompleted && <span className="text-red-500 text-xs">{errors.isCompleted.message}</span>}
+            {errors.status && <span className="text-red-500 text-xs">{errors.status.message}</span>}
             </div>
 
           <div className="flex justify-end space-x-3 mt-6">

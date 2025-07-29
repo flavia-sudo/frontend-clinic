@@ -123,14 +123,15 @@ const CreateAppointments = () => {
           {/* Status */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <input
-              type="text"
-              placeholder="e.g. pending"
-              {...register("status")}
-              className="input input-bordered w-full"
-            />
-            {errors.status && <p className="text-red-500 text-xs">{errors.status.message}</p>}
-          </div>
+            <select
+                {...register("status")}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            >
+                <option value="true">Confirmed</option>
+                <option value="false">Not Confirmed</option>
+            </select>
+            {errors.status && <span className="text-red-500 text-xs">{errors.status.message}</span>}
+            </div>
 
           {/* Action buttons */}
           <div className="flex justify-end space-x-3 pt-4">

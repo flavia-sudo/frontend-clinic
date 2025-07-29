@@ -57,7 +57,7 @@ const Register = () => {
             phoneNumber,
             address,
             password,
-            role: "admin",
+            role: "user",
         };
 
         try {
@@ -108,7 +108,6 @@ const Register = () => {
         setErrorMessage("");
         const user = localStorage.getItem("User");
         const email = user ? JSON.parse(user).email : "";
-        console.log(email)
 
         try {
             const response = await axios.post("https://medical-backend-v1wz.onrender.com/auth/verify", {
