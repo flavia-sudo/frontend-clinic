@@ -86,7 +86,7 @@ const CreatePrescription = () => {
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             Patient ID
                         </label>
-                        <input type="text" {...register("patientId")} className="input input-bordered w-full max-w-xs" />
+                        <input type="number" {...register("patientId")} className="input input-bordered w-full max-w-xs" />
                         {errors.patientId && <span className="text-red-500">{errors.patientId.message}</span>}
                     </div>
                     <div>

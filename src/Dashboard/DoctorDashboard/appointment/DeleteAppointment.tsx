@@ -1,26 +1,26 @@
 import { toast } from "sonner";
-import { paymentAPI, type TPayment } from "../../../features/paymentAPI";
+import { appointmentsAPI, type TAppointment } from "../../../features/appointmentAPI";
 
-type DeletePaymentProps = {
-    payment: TPayment | null;
+type DeleteAppointmentProps = {
+    appointment: TAppointment | null;
 };
 
-const DeletePayment = ({ payment }: DeletePaymentProps) => {
-    const [deletePayment, { isLoading }] = paymentAPI.useDeletePaymentMutation();
+const DeleteAppointment = ({ appointment }: DeleteAppointmentProps) => {
+    const [deleteAppointment, { isLoading }] = appointmentsAPI.useDeleteAppointmentMutation();
 
     const handleDelete = async () => {
         try {
-            if (!payment) {
-                toast.error("No payment selected for deletion.");
+            if (!appointment) {
+                toast.error("No appointment selected for deletion.");
                 return;
             }
 
-            const response = await deletePayment(payment.paymentId);
-            console.log("Payment deleted successfully", response);
-            toast.success("Payment deleted successfully!");
+            const response = await deleteAppointment(appointment.appointmentId);
+            console.log("Appointment deleted successfully", response);
+            toast.success("Appointment deleted successfully!");
         } catch (error) {
-            console.error("Error deleting payment:", error);
-            toast.error("Failed to delete payment. Please try again.");
+            console.error("Error deleting appointment:", error);
+            toast.error("Failed to delete appointment. Please try again.");
         }
     };
 
@@ -34,9 +34,9 @@ const DeletePayment = ({ payment }: DeletePaymentProps) => {
         onClick={handleClose}
       ></div>
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-6 w-full max-w-md z-50">
-        <h3 className="font-bold text-xl mb-2 text-gray-800">Delete Payment</h3>
+        <h3 className="font-bold text-xl mb-2 text-gray-800">Delete Appointment</h3>
         <p className="text-gray-600 mb-6">
-          Are you sure you want to delete this payment?
+          Are you sure you want to delete this appointment?
           This action cannot be undone.
         </p>
         <div className="flex justify-end space-x-3">
@@ -54,12 +54,11 @@ const DeletePayment = ({ payment }: DeletePaymentProps) => {
             onClick={handleDelete}
             disabled={isLoading}
           >
-            {isLoading ? 'Deleting...' : 'Delete Payment'}
+            {isLoading ? 'Deleting...' : 'Delete Appointment'}
           </button>
         </div>
       </div>
     </dialog>
   )
 }
-
-export default DeletePayment;
+export default DeleteAppointment;
