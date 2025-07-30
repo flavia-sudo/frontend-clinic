@@ -37,19 +37,17 @@ const Appointments = () => {
           <table className="min-w-full text-sm text-gray-800">
             <thead className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wide">
               <tr>
-                <th className="px-4 py-4 text-left">First Name</th>
-                <th className="px-4 py-4 text-left">Last Name</th>
-                <th className="px-4 py-4 text-left">Email</th>
-                <th className="px-4 py-4 text-left">Phone</th>
-                <th className="px-4 py-4 text-left">Specialization</th>
-                <th className="px-4 py-4 text-left">Available Days</th>
+                <th className="px-4 py-4 text-left">User ID</th>
+                <th className="px-4 py-4 text-left">Appointment Date</th>
+                <th className="px-4 py-4 text-left">Time</th>
+                <th className="px-4 py-4 text-left">Status</th>
+                <th className="px-4 py-4 text-left">Total Amount</th>
                 <th className="px-4 py-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {appointmentsData.map((appointment: TAppointment) => (
                 <tr key={appointment.appointmentId} className="hover:bg-gray-50 transition">
-                  <td className="px-4 py-3">{appointment.doctorId}</td>
                   <td className="px-4 py-3">{appointment.userId}</td>
                   <td className="px-4 py-3">{appointment.appointmentDate}</td>
                   <td className="px-4 py-3">{appointment.time ?? 'N/A'}</td>

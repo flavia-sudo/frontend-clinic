@@ -108,15 +108,16 @@ const Register = () => {
         setErrorMessage("");
         const user = localStorage.getItem("User");
         const email = user ? JSON.parse(user).email : "";
+        console.log(email)
 
         try {
             const response = await axios.post("https://medical-backend-v1wz.onrender.com/auth/verify", {
                 email,
                 code,
             });
+                                console.log(response.data);
 
             if (response.status === 200) {
-                window.location.reload(); // reflect changes immediately
                 navigate("/");
             } else {
                 setErrorMessage(response.data.message || "Verification failed");
@@ -287,7 +288,6 @@ const Register = () => {
                                     </button>
                                 </p>
                             </div>
-
                             <div>
                                 <button
                                     type="submit"
@@ -323,7 +323,6 @@ const Register = () => {
                                 <div>
                                     <button
                                         type="submit"
-                                        onClick={() => navigate("/")}
                                         className="w-full px-4 py-2 font-semibold text-white transition-colors duration-300 bg-purple-800 rounded-md shadow-lg hover:bg-purple-700"
                                     >
                                         Verify

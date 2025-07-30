@@ -15,37 +15,41 @@ const Users = () => {
     const [selectedUser, setSelectedUser] = useState<TUser | null>(null);
 
     return (
-        <div>
-
+        <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+          Users List
+        </h2>
+        </div>
             {/* Change Role Modal */}
             <ChangeRole user={selectedUser} />
 
             {/* Display Users */}
-            {isLoading && <p>Loading users...</p>}
-            {error && <p className="text-red-500">Error fetching users</p>}
+            {isLoading && <p className="text-gray-600">Loading users...</p>}
+            {error && <p className="text-red-600">Error fetching users</p>}
             {Array.isArray(usersData) && usersData.length > 0 ? (
-                <div className="overflow-x-auto">
-                    <table className="table table-xl bg-gray-800 text-2xl">
-                        <thead>
-                            <tr className="bg-gray-800 text-white text-xl lg:text-lg">
+                <div className="overflow-x-auto rounded-lg border border-gray-200">
+                    <table className="min-w-full text-sm text-gray-800">
+                        <thead className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                            <tr>
 
-                                <th className="px-6 py-4">First Name</th>
-                                <th className="px-6 py-4">Last Name</th>
-                                <th className="px-6 py-4">Email</th>
-                                <th className="px-6 py-4">Role</th>
-                                <th className="px-6 py-4">Verified</th>
-                                <th className="px-6 py-4">Actions</th>
+                                <th className="px-4 py-4 text-left">First Name</th>
+                                <th className="px-4 py-4 text-left">Last Name</th>
+                                <th className="px-4 py-4 text-left">Email</th>
+                                <th className="px-4 py-4 text-left">Role</th>
+                                <th className="px-4 py-4 text-left">Verified</th>
+                                <th className="px-4 py-4 text-left">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-gray-200 bg-white">
                             {usersData.map((user: TUser) => (
-                                <tr key={user.userId} className="hover:bg-gray-600 border-b border-gray-400">
+                                <tr key={user.userId} className="hover:bg-gray-50 transition">
 
-                                    <td className="px-6 py-4 border-r border-gray-400 lg:text-base">{user.firstName}</td>
-                                    <td className="px-6 py-4 border-r border-gray-400 lg:text-base">{user.lastName}</td>
-                                    <td className="px-6 py-4 border-r border-gray-400 lg:text-base">{user.email}</td>
-                                    <td className="px-6 py-4 border-r border-gray-400 lg:text-base">{user.role}</td>
-                                    <td className="px-6 py-4 border-r border-gray-400 lg:text-base">
+                                    <td className="px-4 py-3">{user.firstName}</td>
+                                    <td className="px-4 py-3">{user.lastName}</td>
+                                    <td className="px-4 py-3">{user.email}</td>
+                                    <td className="px-4 py-3">{user.role}</td>
+                                    <td className="px-4 py-3">
                                         <span className={`badge ${user.verified ? "badge-success" : "badge-warning"}`}>
                                             {user.verified ? (
                                                 <span className="text-green-700 lg:text-base">Verified</span>
@@ -54,9 +58,9 @@ const Users = () => {
                                             )}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-2">
+                                    <td className="px-4 py-3">
                                         <button
-                                            className="btn btn-sm btn-primary text-white"
+                                            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                                             onClick={() => {
                                                 setSelectedUser(user);
                                                 (document.getElementById('role_modal') as HTMLDialogElement)?.showModal();
