@@ -11,7 +11,7 @@ const Footer = () => {
                             <div className="bg-purple-600 p-2 rounded-lg">
                                 <Phone className="h-6 w-6 text-white" />
                             </div>
-                            <span className="text-xl font-bold">MediCare</span>
+                            <span className="text-xl font-bold">MediPulse</span>
                         </div>
                         <p className="text-gray-400 mb-6 leading-relaxed">
                             Providing exceptional healthcare services with compassion and expertise. Your health is our
