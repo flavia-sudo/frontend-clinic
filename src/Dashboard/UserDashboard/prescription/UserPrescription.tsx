@@ -1,18 +1,16 @@
 import { prescriptionAPI, type TPrescription } from "../../../features/prescriptionAPI";
 // import UpdatePrescription from "../../DoctorDashboard/prescription/UpdatePrescription";
 // import DeletePrescription from "./DeletePrescription";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
 
 const Prescriptions = () => {
-    const userString = localStorage.getItem("User");
-    const user = userString ? JSON.parse(userString) : null;
-    const userId = user?.userId;
+    const appointmentString = localStorage.getItem("User");
+    const appointment = appointmentString ? JSON.parse(appointmentString) : null;
+    const appointmentId = appointment?.appointmentId;
     const {
         data: prescriptionsData,
         isLoading: prescriptionsLoading,
         error: prescriptionsError,
-    } = prescriptionAPI.useGetPrescriptionsQuery(undefined, {
+    } = prescriptionAPI.useGetPrescriptionsQuery(appointmentId, {
         refetchOnMountOrArgChange: true,
         pollingInterval: 60000
     });
