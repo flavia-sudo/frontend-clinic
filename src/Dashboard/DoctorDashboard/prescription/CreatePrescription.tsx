@@ -100,7 +100,7 @@ const CreatePrescription = () => {
                         <button type="submit" className="btn btn-primary" disabled={isLoading}>
                             {isLoading ? "Creating..." : "Create"}
                         </button>
-                        <button type="button" className="btn" onClick={() => (document.getElementById("update_modal") as HTMLDialogElement)?.close()}>
+                        <button type="button" className="btn" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.close()}>
                         Close
                         </button>
                     </div>

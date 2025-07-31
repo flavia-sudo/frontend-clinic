@@ -51,7 +51,10 @@ const DeleteComplaint = ({ complaint }: DeleteComplaintProps) => {
           <button
             type="button"
             className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors"
-            onClick={handleDelete}
+            onClick={() => {
+              handleDelete();
+              handleClose();
+            }}
             disabled={isLoading}
           >
             {isLoading ? 'Deleting...' : 'Delete Complaint'}

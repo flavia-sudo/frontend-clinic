@@ -60,9 +60,12 @@ const Complaints = () => {
                                         <td className="px-4 py-3">{complaint.appointmentId}</td>
                                         <td className="px-4 py-3">{complaint.subject}</td>
                                         <td className="px-4 py-3">{complaint.description}</td>
-                                        <td className="px-4 py-3">{complaint.status}</td>
+                                        <td className="px-4 py-3">{complaint.status ? "Resolved" : "Pending"}</td>
                                         <td className="px-4 py-3">
-                                            <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300" onClick={() => handleEdit(complaint)}>
+                                            <button 
+                                                className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300" 
+                                                onClick={() => handleEdit(complaint)}
+                                            >
                                                 <FaEdit />
                                             </button>
                                             <button 

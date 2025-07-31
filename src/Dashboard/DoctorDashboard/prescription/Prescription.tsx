@@ -28,9 +28,16 @@ const Prescriptions = () => {
             <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
                     <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">Prescriptions List</h2>
-                    <button className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
-                       + Create Prescription
-                    </button>
+                        <button 
+                        className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded-lg transition duration-200 shadow-sm" 
+                        onClick={() => {
+                            const modal = document.getElementById("create_modal") as HTMLDialogElement;
+                            if (modal) modal.showModal();
+                            else console.error("Create modal not found in DOM");
+                        }}
+                        >
+                        + Create Prescription
+                        </button>
                 </div>
     
                 <CreatePrescription />

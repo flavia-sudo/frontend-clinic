@@ -62,6 +62,7 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
             toast.success("Complaint updated successfully!");
             reset();
             (document.getElementById("update_modal") as HTMLDialogElement)?.close();
+            window.location.reload();
         } catch (error) {
             console.error("Error updating complaint:", error);
             toast.error("Failed to update complaint. Please try again.");
@@ -69,17 +70,17 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
     };
 
     const handleClose = () => {
-    ;(document.getElementById('create_modal') as HTMLDialogElement)?.close()
+    ;(document.getElementById('update_modal') as HTMLDialogElement)?.close()
   }
 
     return (
-        <dialog id="create_modal" className="fixed inset-0 z-50 bg-transparent">
+        <dialog id="update_modal" className="fixed inset-0 z-50 bg-transparent">
         <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={handleClose}
         ></div>
             <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-6 w-full max-w-md z-50">
-                <h3 className="font-bold text-xl mb-4 text-gray-800">Create Complaint</h3>
+                <h3 className="font-bold text-xl mb-4 text-gray-800">Update Complaint</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="form-control w-full">
                         <label className="block text-sm font-medium text-gray-700 mb-1">
