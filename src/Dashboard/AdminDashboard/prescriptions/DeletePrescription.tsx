@@ -16,6 +16,7 @@ const DeletePrescription = ({ prescription }: DeletePrescriptionProps) => {
             }
             await deletePrescription(prescription.prescriptionId);
             toast.success("Prescription deleted successfully");
+            window.location.reload();
         } catch (error) {
             toast.error("Failed to delete prescription");
         }

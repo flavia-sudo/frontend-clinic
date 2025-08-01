@@ -60,17 +60,11 @@ const Complaints = () => {
                                         <td className="px-4 py-3">{complaint.appointmentId}</td>
                                         <td className="px-4 py-3">{complaint.subject}</td>
                                         <td className="px-4 py-3">{complaint.description}</td>
-                                        <td className="px-4 py-3">{complaint.status}</td>
+                                        <td className="px-4 py-3">{complaint.status ? "Resolved" : "Pending"}</td>
                                         <td className="px-4 py-3">
-                                            <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300" onClick={() => handleEdit(complaint)}>
+                                            <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300" 
+                                            onClick={() => handleEdit(complaint)}>
                                                 <FaEdit />
-                                            </button>
-                                            <button 
-                                            className="cursor-pointer bg-red-600 hover:bg-red-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-red-300"
-                                            onClick={() => { setComplaintToDelete(complaint);
-                                                (document.getElementById("delete_modal") as HTMLDialogElement)?.showModal();
-                                            }}>
-                                                <MdDeleteForever />
                                             </button>
                                         </td>
                                     </tr>

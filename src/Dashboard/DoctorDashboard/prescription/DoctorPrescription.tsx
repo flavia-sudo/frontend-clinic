@@ -1,4 +1,5 @@
 import { prescriptionAPI, type TPrescription } from "../../../features/prescriptionAPI";
+import CreatePrescription from "./CreatePrescription";
 
 const Prescriptions = () => {
     const userString = localStorage.getItem("User");
@@ -18,7 +19,8 @@ const Prescriptions = () => {
             <div className="p-6 bg-white rounded-lg shadow-md position-relative">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-gray-800">Prescriptions List</h2>
-                    <button className="btn bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-md transition duration-200" onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
+                    <button className="btn bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-md transition duration-200"
+                     onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}>
                         Create Prescription
                     </button>
                 </div>
@@ -43,7 +45,7 @@ const Prescriptions = () => {
                                             <td className="px-6 py-4">{prescription.appointmentId}</td>
                                             <td className="px-6 py-4">{prescription.doctorId}</td>
                                             <td className="px-6 py-4">{prescription.patientId}</td>
-                                            <td className="px-6 py-4">{prescription.notes}</td>
+                                            <td className="px-6 py-4">{prescription.prescription}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -52,6 +54,8 @@ const Prescriptions = () => {
                 ) : (
                     !prescriptionsLoading && !prescriptionsError && <p className="text-gray-600">No prescriptions found</p>
                 )}
+
+                <CreatePrescription />
             </div>
         );
     };

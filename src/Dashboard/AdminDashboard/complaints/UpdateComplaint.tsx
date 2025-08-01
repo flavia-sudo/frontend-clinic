@@ -37,10 +37,14 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
     });
 
     const [updateComplaint, { isLoading }] = complaintsAPI.useUpdateComplaintMutation();
+    const user = localStorage.getItem("User");
+    const userId = user ? JSON.parse(user).userId : null;
 
     useEffect(() => {
+        if (userId) {
+            setValue("userId", userId);
+        }
         if (complaint) {
-            setValue("userId", complaint.userId);
             setValue("appointmentId", complaint.appointmentId);
             setValue("subject", complaint.subject);
             setValue("description", complaint.description);
@@ -48,7 +52,7 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
         } else {
             reset();
         }
-    }, [complaint, reset, setValue]);
+    }, [complaint, reset, setValue, userId]);
 
     const onSubmit: SubmitHandler<UpdateComplaintInputs> = async (data) => {
         try {
@@ -69,11 +73,11 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
     };
 
     const handleClose = () => {
-    ;(document.getElementById('create_modal') as HTMLDialogElement)?.close()
+    ;(document.getElementById('update_modal') as HTMLDialogElement)?.close()
   }
 
     return (
-        <dialog id="create_modal" className="fixed inset-0 z-50 bg-transparent">
+        <dialog id="update_modal" className="fixed inset-0 z-50 bg-transparent">
         <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={handleClose}
@@ -81,13 +85,6 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
             <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-6 w-full max-w-md z-50">
                 <h3 className="font-bold text-xl mb-4 text-gray-800">Create Complaint</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <div className="form-control w-full">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                        User ID
-                        </label>
-                        <input type="number" {...register("userId")} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        {errors.userId && <span className="text-red-500 text-xs mt-1">{errors.userId.message}</span>}
-                    </div>
                     <div className="form-control w-full">
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                         Appointment ID

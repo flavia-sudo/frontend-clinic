@@ -62,47 +62,64 @@ const ChangeRole = ({ user }: ChangeRoleProps) => {
     };
 
     return (
-        <dialog id="role_modal" className="modal sm:modal-middle">
-            <div className="modal-box bg-gray-600 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
-                <h3 className="font-bold text-lg mb-4">
-                    Change Role for {user?.firstName} {user?.lastName}
-                </h3>
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                    <label className="text-white font-semibold">Select Role:</label>
-                    <select
-                        {...register("role")}
-                        className="select select-bordered w-full bg-white text-black dark:bg-gray-200 dark:text-black"
-                    >
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="doctor">Doctor</option>
-                    </select>
-                    {errors.role && (
-                        <span className="text-sm text-red-700">{errors.role.message}</span>
-                    )}
+        <dialog id="role_modal" className="fixed inset-0 z-50 bg-transparent">
+        <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => {
+            (document.getElementById("role_modal") as HTMLDialogElement)?.close();
+            reset();
+            }}
+        ></div>
 
-                    <div className="modal-action flex flex-col sm:flex-row gap-2">
-                        <button type="submit" className="btn btn-primary w-full sm:w-auto" disabled={isLoading}>
-                            {isLoading ? (
-                                <>
-                                    <span className="loading loading-spinner text-primary" /> Updating...
-                                </>
-                            ) : "Update Role"}
-                        </button>
-                        <button
-                            className="btn w-full sm:w-auto"
-                            type="button"
-                            onClick={() => {
-                                (document.getElementById('role_modal') as HTMLDialogElement)?.close();
-                                reset();
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
+        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-6 w-full max-w-md z-50">
+            <h3 className="font-bold text-xl mb-4 text-gray-800">
+            Change Role for {user?.firstName} {user?.lastName}
+            </h3>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Select Role:</label>
+                <select
+                {...register("role")}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white"
+                >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="doctor">Doctor</option>
+                </select>
+                {errors.role && <span className="text-red-500 text-xs">{errors.role.message}</span>}
             </div>
+
+            <div className="flex justify-end space-x-3 pt-4">
+                <button
+                type="button"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
+                onClick={() => {
+                    (document.getElementById("role_modal") as HTMLDialogElement)?.close();
+                    reset();
+                }}
+                >
+                Cancel
+                </button>
+
+                <button
+                type="submit"
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+                disabled={isLoading}
+                >
+                {isLoading ? (
+                    <>
+                    <span className="loading loading-spinner text-white" /> Updating...
+                    </>
+                ) : (
+                    "Update Role"
+                )}
+                </button>
+            </div>
+            </form>
+        </div>
         </dialog>
+
     );
 };
 

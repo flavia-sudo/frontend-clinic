@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChangeRole from "./ChangeRole";
+import DeleteUser from "./DeleteUser";
 import { usersAPI, type TUser } from "../../../features/userAPI";
 
 const Users = () => {
@@ -23,6 +24,8 @@ const Users = () => {
         </div>
             {/* Change Role Modal */}
             <ChangeRole user={selectedUser} />
+            <DeleteUser user={selectedUser} />
+
 
             {/* Display Users */}
             {isLoading && <p className="text-gray-600">Loading users...</p>}
@@ -67,6 +70,15 @@ const Users = () => {
                                             }}
                                         >
                                             Change Role
+                                        </button>
+                                        <button
+                                            className="cursor-pointer bg-red-600 hover:bg-red-700 text-white p-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-red-300 ml-2"
+                                            onClick={() => {
+                                                setSelectedUser(user);
+                                                (document.getElementById('delete_modal') as HTMLDialogElement)?.showModal();
+                                            }}
+                                        >
+                                            Delete
                                         </button>
                                     </td>
                                 </tr>
