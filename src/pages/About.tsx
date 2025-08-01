@@ -1,5 +1,4 @@
-import React from 'react';
-import { Award, Users, Heart, Target, MapPin, Phone, Mail, Star } from 'lucide-react';
+import { Award, Users, Heart, MapPin, Phone, Mail, Star } from 'lucide-react';
 
 const About = () => {
   const teamMembers = [
@@ -64,10 +63,10 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                About <span className="text-purple-600">MediCare</span>
+                About <span className="text-purple-600">MediPulse</span>
               </h1>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                For over two decades, MediCare has been the trusted healthcare provider
+                For over two decades, MediPulse has been the trusted healthcare provider
                 in our community. We combine cutting-edge medical technology with
                 compassionate care to deliver exceptional health outcomes.
               </p>
@@ -235,7 +234,7 @@ const About = () => {
             Ready to Experience Quality Healthcare?
           </h2>
           <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-            Schedule an appointment today and discover why thousands of patients trust MediCare
+            Schedule an appointment today and discover why thousands of patients trust MediPulse
             for their healthcare needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -253,7 +252,7 @@ const About = () => {
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="h-4 w-4" />
-              <span>info@medicare.com</span>
+              <span>info@medipulse.com</span>
             </div>
             <div className="flex items-center space-x-2">
               <MapPin className="h-4 w-4" />

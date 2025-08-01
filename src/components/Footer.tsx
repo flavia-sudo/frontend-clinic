@@ -75,7 +75,7 @@ const Footer = () => {
                             </div>
                             <div className="flex items-center space-x-3">
                                 <Mail className="h-5 w-5 text-purple-400 flex-shrink-0" />
-                                <span className="text-gray-400">info@medicare.com</span>
+                                <span className="text-gray-400">info@medipulse.com</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ const Footer = () => {
 
                 <div className="border-t border-gray-800 mt-12 pt-8 text-center">
                     <p className="text-gray-400">
-                        © 2025 MediCare. All rights reserved. | Privacy Policy | Terms of Service
+                        © 2025 MediPulse. All rights reserved. | Privacy Policy | Terms of Service
                     </p>
                 </div>
             </div>
