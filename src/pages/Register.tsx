@@ -72,7 +72,7 @@ const Register = () => {
             );
 
             if (response.status !== 201) {
-                setErrorMessage(response.data.message || "Registration failed");
+                setErrorMessage(response.data.message || "Regristration failed");
                 return;
             }
 

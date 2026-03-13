@@ -21,7 +21,7 @@ const UserDashboard = () => {
         >
           {drawerOpen ? <IoCloseSharp size={24} /> : <FaBars size={20} />}
         </button>
-        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-xl font-bold">User Dashboard</h1>
       </header>
 
       <div className="flex flex-1 relative">
