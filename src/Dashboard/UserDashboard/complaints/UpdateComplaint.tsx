@@ -70,7 +70,7 @@ const UpdateComplaint = ({ complaint }: UpdateComplaintProps) => {
     };
 
     const handleClose = () => {
-    ;(document.getElementById('update_modal') as HTMLDialogElement)?.close()
+    (document.getElementById('update_modal') as HTMLDialogElement)?.close()
   }
 
     return (

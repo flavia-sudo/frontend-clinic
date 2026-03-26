@@ -25,7 +25,7 @@ const DeleteComplaint = ({ complaint }: DeleteComplaintProps) => {
     };
 
     const handleClose = () => {
-    ;(document.getElementById('delete_modal') as HTMLDialogElement)?.close()
+    (document.getElementById('delete_modal') as HTMLDialogElement)?.close()
   }
   return (
     <dialog id="delete_modal" className="fixed inset-0 z-50 bg-transparent">
